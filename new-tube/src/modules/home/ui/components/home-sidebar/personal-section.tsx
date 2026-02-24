@@ -18,9 +18,15 @@ import {
 } from "lucide-react";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const items = [
-  { title: "History", url: "/playlists", icon: HistoryIcon, auth: true },
+  {
+    title: "History",
+    url: "/playlists/history",
+    icon: HistoryIcon,
+    auth: true,
+  },
   {
     title: "Liked videos",
     url: "/playlists/liked",
@@ -38,6 +44,7 @@ const items = [
 export const PersonalSection = () => {
   const clerk = useClerk();
   const { isSignedIn } = useAuth();
+  const pathname = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -48,7 +55,7 @@ export const PersonalSection = () => {
               <SidebarMenuButton
                 tooltip={item.title}
                 asChild
-                isActive={false} // TODO: Change to look at current pathname
+                isActive={pathname === item.url}
                 onClick={(e) => {
                   if (!isSignedIn && item.auth) {
                     e.preventDefault();
