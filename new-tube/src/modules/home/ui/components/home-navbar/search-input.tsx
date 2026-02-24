@@ -3,24 +3,27 @@
 import { Button } from "@/components/ui/button";
 import { APP_URL } from "@/constants";
 import { SearchIcon, XIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export const SearchInput = () => {
   const router = useRouter();
-
-  const [value, setValue] = useState("");
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+  const categoryId = searchParams.get("categoryId") || "";
+  const [value, setValue] = useState(query);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = new URL(
-      "/search",
-      APP_URL ? `https://${APP_URL}` : "http://localhost:3000",
-    );
+    const url = new URL("/search", APP_URL);
     const newQuery = value.trim();
 
     url.searchParams.set("query", encodeURIComponent(newQuery));
+
+    if (categoryId) {
+      url.searchParams.set("categoryId", categoryId);
+    }
 
     if (newQuery === "") {
       url.searchParams.delete("query");
@@ -31,12 +34,10 @@ export const SearchInput = () => {
   };
 
   return (
-    <form
-      action=""
-      className="flex w-full max-w-[600px]"
-      onSubmit={handleSearch}>
+    <form className="flex w-full max-w-[600px]" onSubmit={handleSearch}>
       <div className="relative w-full">
         <input
+          value={value}
           type="text"
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search"
@@ -52,7 +53,6 @@ export const SearchInput = () => {
             <XIcon className="text-gray-500" />
           </Button>
         )}
-        {/* TODO: add remove search button */}
       </div>
       <button
         disabled={!value.trim()}

@@ -29,7 +29,7 @@ const videoRowCardVariants = cva("group flex min-w-0", {
   },
 });
 
-const thumbanilVariants = cva("relative flex-none", {
+const thumbnailVariants = cva("relative flex-none", {
   variants: {
     size: {
       default: "w-[38%]",
@@ -51,29 +51,31 @@ export const VideoRowCardSkeleton = ({
 }: VariantProps<typeof videoRowCardVariants>) => {
   return (
     <div className={videoRowCardVariants({ size })}>
-      <div className={thumbanilVariants({ size })}>
+      <div className={thumbnailVariants({ size })}>
         <VideoThumbnailSkeleton />
       </div>
 
       <div className="flex-1 min-w-0">
         <div className="flex justify-between gap-x-2">
-          <Skeleton
-            className={cn("h-5 w-[40%]", size === "compact" && "h-4 w-[40%]")}
-          />
-          {size === "default" && (
-            <>
-              <Skeleton className="h-4 w-[20%] mt-1" />
-              <div className="flex items-center gap-2 my-3">
-                <Skeleton className="size-8 rounded-full" />
-                <Skeleton className="h-4 w-24" />
-              </div>
-            </>
-          )}
-          {size === "compact" && (
-            <>
-              <Skeleton className="h-4 w-[50%] mt-1" />
-            </>
-          )}
+          <div className="flex-1 min-w-0">
+            <Skeleton
+              className={cn("h-5 w-[40%]", size === "compact" && "h-4 w-[40%]")}
+            />
+            {size === "default" && (
+              <>
+                <Skeleton className="h-4 w-[20%] mt-1" />
+                <div className="flex items-center gap-2 my-3">
+                  <Skeleton className="size-8 rounded-full" />
+                  <Skeleton className="h-4 w-24" />
+                </div>
+              </>
+            )}
+            {size === "compact" && (
+              <>
+                <Skeleton className="h-4 w-[50%] mt-1" />
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +101,7 @@ export const VideoRowCard = ({
 
   return (
     <div className={videoRowCardVariants({ size })}>
-      <Link href={`/videos/${data.id}`} className={thumbanilVariants({ size })}>
+      <Link href={`/videos/${data.id}`} className={thumbnailVariants({ size })}>
         <VideoThumbnail
           imageUrl={data.thumbnailUrl}
           previewUrl={data.previewUrl}
