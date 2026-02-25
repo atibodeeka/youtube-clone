@@ -183,7 +183,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     },
   });
 
-  const generateTitle = trpc.videos.generateThumbnail.useMutation({
+  const generateTitle = trpc.videos.generateTitle.useMutation({
     onSuccess: () => {
       toast.success("Background job started", {
         description: "This may take some time",
@@ -492,7 +492,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     <FormLabel>Visibility</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value ?? undefined}>
+                      defaultValue={field.value as string | undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a visibility" />

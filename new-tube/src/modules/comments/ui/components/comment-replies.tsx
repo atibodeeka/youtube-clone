@@ -1,7 +1,6 @@
 import { DEFAULT_LIMIT } from "@/constants";
 import { trpc } from "@/trpc/client";
 import { CornerDownRightIcon, Loader2Icon } from "lucide-react";
-import { comment } from "postcss";
 import { CommentItem } from "./comment-item";
 import { Button } from "@/components/ui/button";
 

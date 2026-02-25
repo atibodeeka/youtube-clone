@@ -8,14 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {
-  FlameIcon,
-  HistoryIcon,
-  HomeIcon,
-  ListVideoIcon,
-  PlaySquareIcon,
-  ThumbsUpIcon,
-} from "lucide-react";
+import { HistoryIcon, ListVideoIcon, ThumbsUpIcon } from "lucide-react";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

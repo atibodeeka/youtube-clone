@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 interface HomeVideosSectionProps {
-  categoryId: string;
+  categoryId?: string;
 }
 
 export const HomeVideosSection = (props: HomeVideosSectionProps) => {
